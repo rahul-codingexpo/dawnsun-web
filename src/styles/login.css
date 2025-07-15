@@ -130,15 +130,14 @@
         width: 100%;
         min-height: 100vh;
         justify-content: flex-start;
-        padding-left: 20px;
-        padding-right: 20px;
+        
     }
 
     .login-form-box {
         width: 100%;
         max-width: 400px;
         margin: auto;
-        
+        padding: 20px;
     }
 
     .logo-image {
