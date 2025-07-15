@@ -1,0 +1,191 @@
+.changePass-page {
+    display: flex;
+    min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.changePass-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.changePass-form-box p {
+    font-weight: 400;
+    font-size: 14px;
+    color: #757B97;
+}
+
+.changePass-form-box {
+    width: 90%;
+    max-width: 400px;
+}
+
+.changePass-form-box form label {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.changePass-form-box h2 {
+    font-weight: 600;
+    font-size: 32px;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+}
+
+.changePass-form-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.changePass-form-box label {
+    margin-bottom: 6px;
+    color: #333;
+    font-size: 14px;
+}
+
+.changePass-form-box input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.login-extra {
+    text-align: right;
+    margin-bottom: 16px;
+}
+
+.login-extra a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    color: #4F46E5;
+}
+
+.signup-link a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    color: #4F46E5;
+}
+
+.changePass-form-box button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.changePass-form-box button:hover {
+    background-color: #0056b3;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.changePass-left {
+    flex: 1;
+    background-color: #1570EF;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.changePass-left h1 {
+    color: #F7981A;
+    margin: 0;
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+.changePass-left p {
+    background: linear-gradient(to bottom, white 40%, rgba(255, 255, 255, 0.2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        background-clip: text;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 200;
+}
+
+.changePass-left .changePass-content {
+    margin-left: 100px;
+    margin-top: 200px;
+
+}
+
+.changePass-left .changePass-content p {
+    width: 35%;
+}
+
+.logo-image img {
+    width: 50px;
+    height: 50px;
+}
+
+@media (max-width: 768px) {
+    .changePass-page {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .changePass-left {
+        display: none;
+    }
+
+    .changePass-right {
+        width: 100%;
+        min-height: 100vh;
+        justify-content: flex-start;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .changePass-form-box {
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+    }
+
+    .logo-image {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .logo-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .changePass-form-box h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .changePass-form-box p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .changePass-form-box input {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .changePass-form-box button {
+        padding: 12px;
+        font-size: 16px;
+    }
+}

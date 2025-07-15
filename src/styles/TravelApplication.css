@@ -1,0 +1,224 @@
+.travel-page {
+    background-color: #F3F4F8;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+}
+
+.travel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.travel-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.travel-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.export-btn,
+.filter-btn {
+    background-color: #009fe3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-btn {
+    background-color: #DBEBFF !important;
+    color: #009fe3 !important;
+    border: 1px solid #b4daf6;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+.filter-btn span{
+    padding-right: 10px;
+}
+.filter-btn span svg:hover{
+    color: #009fe3;
+}
+
+.export-btn:hover,
+.filter-btn:hover {
+    opacity: 0.9;
+}
+
+/* Table Styles */
+.travel-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    min-width: 1100px;
+}
+
+.travel-table th,
+.travel-table td {
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.travel-table th {
+    background-color: #fff;
+    color: #333;
+    font-weight: 600;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.travel-table tr:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Email chip */
+.email-chip {
+    background-color: #eaf4fe;
+    color: #009fe3;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Status dropdown */
+.status-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fef0f0;
+    color: #d32f2f;
+    border-radius: 6px;
+    padding: 0.4rem 0.6rem;
+    width: 100px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.status-dropdown .dropdown-icon {
+    margin-left: 0.4rem;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    gap: 10px;
+    padding-left: 20px;
+    font-size: 14px;
+    box-shadow: #7e7c7c;
+    background-color: #fff;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.pagination select {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.status-dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.status-btn {
+    background: none;
+    border: none;
+    color: #c62828;
+    /* red */
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.status-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 999;
+    width: max-content;
+    min-width: 100px;
+}
+
+.status-option {
+    display: block;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.status-option.decline {
+    color: #c62828;
+}
+
+.status-option.approve {
+    color: #2e7d32;
+}
+
+.status-option.in-process {
+    color: #f9a825;
+}
+
+.status-option:hover {
+    background-color: #f0f0f0;
+}
+
+.status-btn.decline {
+    color: #c62828;
+}
+
+.status-btn.approve {
+    color: #2e7d32;
+}
+
+.status-btn.in-process {
+    color: #f9a825;
+}
+
+@media (max-width: 768px) {
+    .travel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .travel-actions {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .export-btn,
+    .filter-btn {
+        flex: 1 1 auto;
+        min-width: 130px;
+    }
+}

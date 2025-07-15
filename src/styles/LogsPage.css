@@ -1,0 +1,53 @@
+.logs-page {
+    padding: 20px;
+    background: #F3F4F8;
+    min-height: 100vh;
+}
+
+.logs-heading {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.logs-table-wrapper {
+    background: white;
+    border-radius: 10px;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.logs-table th,
+.logs-table td {
+    padding: 14px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.email-chip {
+    background-color: #e6f3ff;
+    color: #007bff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}

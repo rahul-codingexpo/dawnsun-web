@@ -1,0 +1,124 @@
+.request-access-page {
+    padding: 20px;
+    background-color: #F3F4F8;
+    min-height: 100vh;
+}
+
+.request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    background-color: #009fe3;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.request-access-page .table-wrapper {
+    background: white;
+    border-radius: 12px;
+    overflow-x: auto;
+    padding: 12px;
+}
+
+.access-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+.access-table th,
+.access-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    text-align: left;
+}
+
+.status-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.status-btn.approve {
+    background-color: #e0f7e9;
+    color: #219653;
+}
+
+.status-btn.decline {
+    background-color: #fdecea;
+    color: #d32f2f;
+}
+
+.status-btn.in-process {
+    background-color: #fff3cd;
+    color: #f0ad4e;
+}
+
+.edit-btn {
+    background-color: #d1ecf1;
+    color: #31708f;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.dropdown-wrapper {
+    position: relative;
+}
+
+.status-options {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.status-options button {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    background: white;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.status-options button:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination select {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+    .request-header{
+        gap:30px;
+    }
+}

@@ -1,0 +1,116 @@
+.files-page {
+    background-color: #F3F4F8;
+    
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.files-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.files-header h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #202224;
+}
+
+.upload-btn {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.files-table {
+    width: 100%;
+    background-color: white;
+    border-radius: 12px;
+    border-collapse: collapse;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.files-table th,
+.files-table td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.files-table th {
+    color: #555;
+}
+
+.edit-btn {
+    background-color: #d1fae5 !important;
+    color: green !important;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pagination-footer {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    gap: 10px;
+    padding-left: 20px;
+    font-size: 14px;
+    box-shadow: #7e7c7c;
+    background-color: #fff;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.action-dropdown {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    min-width: 160px;
+}
+
+.action-dropdown button {
+    background: none;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+}
+
+.action-dropdown button:hover {
+    color: #f5f5f5;
+    background-color: #0698D2;
+}
+
+@media (max-width: 768px) {
+    .table-wrapper {
+        overflow-x: auto;
+    }
+}
+
+

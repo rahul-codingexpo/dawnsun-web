@@ -1,0 +1,39 @@
+.date-filter-popup {
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    width: 250px;
+}
+
+.date-filter-popup label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.date-filter-popup input {
+    width: 100%;
+    padding: 6px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.apply-btn {
+    width: 50%;
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #009de1;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}

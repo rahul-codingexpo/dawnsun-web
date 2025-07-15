@@ -1,0 +1,152 @@
+.leave-page {
+    padding: 1rem;
+    background: #F3F4F8;
+    border-radius: 8px;
+}
+
+.leave-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.leave-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.filter-btn {
+    background: #e5f0ff;
+    color: #1e78ff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.leave-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.leave-table th,
+.leave-table td {
+    padding: 12px 26px;
+    text-align: left;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.leave-table th {
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.leave-table tr{
+    
+    border-bottom: 2px solid #e0e0e0;
+}
+
+
+.email-chip {
+    background-color: #e5f0ff;
+    color: #1e78ff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.approve-btn {
+    background-color: #d1f2e9;
+    color: #27ae60;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.decline-btn {
+    background-color: #fce2e2;
+    color: #e74c3c;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+/* Filter popup container */
+.filter-popup {
+    position: absolute;
+    right: 30px;
+    background-color: #fff;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    z-index: 100;
+    width: 280px;
+}
+
+/* Popup heading */
+.filter-popup h4 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 700;
+}
+.filter-popup label{
+    font-weight: 600;
+}
+/* Date inputs */
+.filter-popup input[type="date"] {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Apply button */
+.filter-popup .apply-btn {
+    width: 50%;
+    background-color: #009fe3;
+    color: white;
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.filter-popup .apply-btn:hover {
+    background-color: #0056b3;
+}

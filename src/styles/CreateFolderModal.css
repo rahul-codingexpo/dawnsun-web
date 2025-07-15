@@ -1,0 +1,126 @@
+.folder-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.folder-modal {
+    background: #fff;
+    width: 600px;
+    max-width: 90%;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.modal-header .close-btn {
+    font-size: 18px !important;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin-top: -20px !important;
+    
+}
+.close-btn {
+    font-size: 17px;
+    text-align: center;
+    cursor: pointer;
+    border-width: 1px;
+    border-radius: 100%;
+    border: 1px solid !important;
+    background: none;
+    margin-top: -50px;
+    margin-right: -15px;
+}
+.modal-divider {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 15px 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.form-group span {
+    color: red;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #f9fafb;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.cancel-btn,
+.create-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.cancel-btn {
+    background: #DBEBFF !important;
+    color: #0698D2 !important;
+}
+
+.create-btn {
+    background: #0698D2;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .folder-modal {
+        padding: 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 20px;
+    }
+}

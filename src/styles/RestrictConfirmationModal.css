@@ -1,0 +1,41 @@
+.restrict-confirm-box {
+    background: #fff;
+    width: 400px;
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.restrict-msg {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 30px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.ignore-btn {
+    background: #e0f0ff;
+    color: #007bff;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.submit-btn {
+    background: #0094e9;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}

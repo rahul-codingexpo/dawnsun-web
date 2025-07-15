@@ -1,0 +1,301 @@
+:root {
+    --bg-light: #f3f4f8;
+    --bg-white: #ffffff;
+    --text-dark: #000000;
+    --text-medium: #202224;
+    --card-shadow: 0px 3px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--bg-light);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.dashboard-main {
+    flex: 1;
+    padding: 35px 30px 30px 40px;
+}
+
+.dashboard-container {
+    position: relative;
+    width: 100%;
+}
+.dashboard-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.dashboard-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-medium);
+    margin-bottom: 3rem;
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+}
+
+.filter-dropdown {
+    position: absolute;
+    max-width: 345px;
+    height: 50px;
+    right: 20px;
+    top: 0;
+}
+.filter-dropdown ul li{
+    list-style: none;
+    padding-left: 10px;
+}
+
+.department-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.department-card {
+    background-color: var(--bg-white);
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.3s ease;
+}
+
+.department-card:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+.department-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    font-family: 'Nunito', sans-serif;
+}
+
+
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    max-width: 354px;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #DBEBFF;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #0698D2;
+    transition: border 0.2s;
+}
+
+
+.dropdown-toggle:hover {
+    border-color: none;
+    background-color: #DBEBFF;
+    color: #0698D2;
+    
+}
+.dropdown-toggle span svg{
+    padding-left: 30px;
+}
+.dropdown-toggle span svg:hover{
+    color: #0698D2;
+}
+
+.left-icon,
+.right-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.left-icon {
+    margin-right: 10px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: -2px;
+    z-index: 100;
+    padding-left: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: #0698D2;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.dropdown-item.selected {
+    background-color: #e8f0fe;
+    font-weight: bold;
+    color: #0698D2;
+}
+
+.dashboard-cards {
+    margin-top: 2rem;
+}
+
+.card-items {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 308px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dashboard-card:hover {
+    background-color: #dbeafe;
+    transform: scale(1.05);
+}
+
+.dashboard-card h3 {
+    font-size: 1.2rem;
+    color: #000;
+    font-weight: 600;
+    text-align: center;
+}
+
+.folder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 50px;
+    margin-top: 2rem;
+}
+
+.folder-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.folder-card:hover {
+    background-color: #e9f4ff;
+    transform: scale(1.05);
+}
+
+.folder-icon {
+    width: 70px;
+    height: 70px;
+    margin: 30px;
+    margin-bottom: 0px;
+}
+
+.folder-card p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #000;
+    
+    font-family: 'Nunito', sans-serif;
+}
+
+
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .dashboard-main {
+        padding: 20px 15px;
+    }
+
+    .dashboard-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .filter-dropdown {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .dropdown-toggle {
+        font-size: 14px;
+    }
+
+    .dashboard-title {
+        font-size: 1.5rem;
+    }
+
+    .card-items {
+        gap: 20px;
+    }
+
+    .dashboard-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .folder-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 20px;
+    }
+
+    .folder-icon {
+        width: 50px;
+        height: 50px;
+        margin: 10px 0;
+    }
+
+    .folder-card p {
+        font-size: 0.9rem;
+    }
+
+    .dropdown-item {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+    }
+}
