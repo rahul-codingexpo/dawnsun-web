@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/TravelApplication.css";
-import { VscSettings } from "react-icons/vsc";
-import DateRangeFilter from "./DateRangeFilter";
-
 const initialData = [
   {
     name: "Christine Brooks",
@@ -19,7 +16,7 @@ const initialData = [
     name: "Christine Brooks",
     email: "christinebrooks@5.com",
     contact: "09876543212",
-    department: "Sales",
+    department: "IT",
     designation: "BD",
     arrivalDate: "4 June, 2025",
     departureDate: "5 June, 2025",
@@ -52,7 +49,7 @@ const initialData = [
     name: "Christine Brooks",
     email: "christinebrooks@5.com",
     contact: "09876543212",
-    department: "Sales",
+    department: "IT",
     designation: "BD",
     arrivalDate: "28 June, 2025",
     departureDate: "29 June, 2025",
@@ -63,7 +60,7 @@ const initialData = [
     name: "Christine Brooks",
     email: "christinebrooks@5.com",
     contact: "09876543212",
-    department: "Sales",
+    department: "DEVELOPMENT",
     designation: "BD",
     arrivalDate: "15 June, 2025",
     departureDate: "16 June, 2025",
@@ -74,7 +71,7 @@ const initialData = [
     name: "Christine Brooks",
     email: "christinebrooks@5.com",
     contact: "09876543212",
-    department: "Sales",
+    department: "IT",
     designation: "BD",
     arrivalDate: "18 June, 2025",
     departureDate: "19 June, 2025",
@@ -98,32 +95,17 @@ const TravelApplication = () => {
   const [travelData, setTravelData] = useState(initialData);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [showFilterPopup, setShowFilterPopup] = useState(false);
-  const [filterRange, setFilterRange] = useState({ start: "", end: "" });
-  const filterRef = useRef();
+  const [searchText, setSearchText] = useState("");
 
   const filteredData = travelData.filter((item) => {
-    if (!filterRange.start && !filterRange.end) return true;
-
-    const arrival = new Date(item.arrivalDate);
-    const start = filterRange.start ? new Date(filterRange.start) : null;
-    const end = filterRange.end ? new Date(filterRange.end) : null;
-
-    if (start && arrival < start) return false;
-    if (end && arrival > end) return false;
-
-    return true;
+    const values = Object.values(item).join(" ").toLowerCase();
+    return values.includes(searchText.toLowerCase());
   });
-
-  const visibleData = filteredData.slice(0, itemsPerPage);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest(".status-dropdown-wrapper")) {
         setOpenDropdownIndex(null);
-      }
-      if (filterRef.current && !filterRef.current.contains(e.target)) {
-        setShowFilterPopup(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -143,25 +125,20 @@ const TravelApplication = () => {
         <h2>Travel Application</h2>
         <div className="travel-actions">
           <button className="export-btn">Export to Excel</button>
-          <div className="filter-wrapper" ref={filterRef}>
+          <div className="search-wrapper">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search here..."
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
             <button
-              className="filter-btn"
-              onClick={() => setShowFilterPopup(!showFilterPopup)}
+              className="search-btn"
+              onClick={() => setSearchText(searchText)}
             >
-              <span>
-                <VscSettings />
-              </span>
-              Filters
+              Search
             </button>
-            {showFilterPopup && (
-              <DateRangeFilter
-                initialRange={filterRange}
-                onApply={(range) => {
-                  setFilterRange(range);
-                  setShowFilterPopup(false);
-                }}
-              />
-            )}
           </div>
         </div>
       </div>
@@ -182,7 +159,7 @@ const TravelApplication = () => {
             </tr>
           </thead>
           <tbody>
-            {visibleData.map((item, idx) => (
+            {filteredData.slice(0, itemsPerPage).map((item, idx) => (
               <tr key={idx}>
                 <td>{item.name}</td>
                 <td>

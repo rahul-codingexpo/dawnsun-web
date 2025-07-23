@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Files from "./files";
-import { VscSettings } from "react-icons/vsc";
 import "../styles/Dashboard.css";
 import folder from "../assets/folder.png";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import Travel from "./TravelApplication";
 import LeaveApplication from "./LeaveApplication";
 import Logs from "./LogsPage";
@@ -18,27 +16,6 @@ const Dashboard = () => {
   const { cardName } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [selectedPerson, setSelectedPerson] = useState("");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest(".custom-dropdown")) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const personOptions = [
-    { label: "Rohan Sharma (HR Department)", value: "rohan" },
-    { label: "Neha Verma (Finance Department)", value: "neha" },
-    { label: "Pooja Singh (Travel Desk)", value: "pooja" },
-    { label: "Vikas Mehta (IT Department)", value: "vikas" },
-    { label: "Anuj Jain (Accounts)", value: "anuj" },
-  ];
 
   const [showUpload, setShowUpload] = useState(false);
 
@@ -65,48 +42,6 @@ const Dashboard = () => {
               <>
                 <div className="dashboard-heading">
                   <h1 className="dashboard-title">Dashboard</h1>
-                </div>
-                <div className="filter-dropdown">
-                  <div className="custom-dropdown">
-                    <button
-                      className="dropdown-toggle"
-                      onClick={() => setDropdownOpen((prev) => !prev)}
-                    >
-                      <span
-                        style={{ paddingRight: "10px", paddingLeft: "0px" }}
-                      >
-                        <VscSettings />
-                      </span>
-                      <span>
-                        {personOptions.find(
-                          (opt) => opt.value === selectedPerson
-                        )?.label || "Filter by Department"}
-                      </span>
-
-                      <span>
-                        <RiArrowDropDownLine size="2em" />
-                      </span>
-                    </button>
-
-                    {dropdownOpen && (
-                      <ul className="dropdown-menu">
-                        {personOptions.map((option) => (
-                          <li
-                            key={option.value}
-                            onClick={() => {
-                              setSelectedPerson(option.value);
-                              setDropdownOpen(false);
-                            }}
-                            className={`dropdown-item ${
-                              selectedPerson === option.value ? "selected" : ""
-                            }`}
-                          >
-                            {option.label}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
                 </div>
               </>
             )}

@@ -19,6 +19,8 @@ const Files = ({ cardName }) => {
   const [showExpiryModal, setShowExpiryModal] = useState(false);
   const [selectedFileIndex, setSelectedFileIndex] = useState(null);
 
+  const [searchText, setSearchText] = useState("");
+
   const handleSetExpiry = (newDate) => {
     const formattedDate = new Date(newDate).toLocaleDateString("en-GB", {
       day: "2-digit",
@@ -91,6 +93,14 @@ const Files = ({ cardName }) => {
       expiryDate: "31 Jul 2026",
     },
   ]);
+
+  const filteredData = fileData.filter((file) =>
+    Object.values(file).some((value) =>
+      value.toLowerCase().includes(searchText.toLowerCase())
+    )
+  );
+
+  const paginatedData = filteredData.slice(0, itemsPerPage);
   const [dropdownOpenIndex, setDropdownOpenIndex] = useState(null);
   const handleAddFile = (newFile) => {
     setFileData((prev) => [newFile, ...prev]);
@@ -121,25 +131,35 @@ const Files = ({ cardName }) => {
     setDropdownOpenIndex(null);
   };
 
-  const paginatedData = fileData.slice(0, itemsPerPage);
-
   return (
     <div className="files-page">
       <div className="files-header">
         <h2>Files</h2>
-        <button className="upload-btn" onClick={() => setShowUpload(true)}>
-          <i className="fas fa-upload">
-            <TbCloudUpload size="1.3rem" />
-          </i>{" "}
-          Upload
-        </button>
-        {showUpload && (
-          <UploadModal
-            onClose={() => setShowUpload(false)}
-            onSubmit={() => setShowUpload(false)}
-            onAddFile={handleAddFile}
+        <div className="header-actions">
+          <input
+            type="text"
+            placeholder="Search here..."
+            className="search-input"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
-        )}
+          <button className="search-btn">
+            <i className="fas fa-search"></i> Search
+          </button>
+          <button className="upload-btn" onClick={() => setShowUpload(true)}>
+            <i className="fas fa-upload">
+              <TbCloudUpload size="1.3rem" />
+            </i>{" "}
+            Upload
+          </button>
+          {showUpload && (
+            <UploadModal
+              onClose={() => setShowUpload(false)}
+              onSubmit={() => setShowUpload(false)}
+              onAddFile={handleAddFile}
+            />
+          )}
+        </div>
       </div>
       <div className="table-wrapper">
         <table className="files-table">

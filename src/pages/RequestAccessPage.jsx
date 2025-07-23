@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../styles/RequestAccess.css";
-import { VscSettings } from "react-icons/vsc";
 import EditRequestModal from "./EditRequestModal";
 
 const dummyData = [
@@ -34,11 +33,18 @@ const RequestAccessPage = () => {
   const [data, setData] = useState(dummyData);
   const [itemsPerPage, setItemsPerPage] = useState(2);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
-
   const [editingIndex, setEditingIndex] = useState(null);
   const [editingData, setEditingData] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
-  const visibleData = data.slice(0, itemsPerPage);
+  const filteredData = data.filter((item) =>
+    Object.values(item)
+      .join(" ")
+      .toLowerCase()
+      .includes(searchText.toLowerCase())
+  );
+
+  const visibleData = filteredData.slice(0, itemsPerPage);
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -61,12 +67,21 @@ const RequestAccessPage = () => {
     <div className="request-access-page">
       <div className="request-header">
         <h2>Request Access</h2>
-        <button className="filter-btn">
-          <span>
-            <VscSettings />
-          </span>
-          Filters
-        </button>
+        <div className="search-wrapper">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search here..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button
+            className="search-btn"
+            onClick={() => setSearchText(searchText)}
+          >
+            Search
+          </button>
+        </div>
       </div>
 
       <div className="table-wrapper">
@@ -135,6 +150,7 @@ const RequestAccessPage = () => {
           </tbody>
         </table>
       </div>
+
       {editingData && (
         <EditRequestModal
           request={editingData}
