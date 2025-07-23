@@ -10,6 +10,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
+    
 }
 
 .files-header h2 {
@@ -88,6 +89,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    height: 24px !important;
 }
 
 .search-btn {
@@ -144,6 +146,14 @@
     .table-wrapper {
         overflow-x: auto;
     }
+        .files-header{
+            display: flex;
+            flex-direction: column;
+        }
+        .header-actions{
+            display: flex;
+            flex-direction: column;
+        }
 }
 
 

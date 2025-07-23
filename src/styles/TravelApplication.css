@@ -213,6 +213,7 @@
     border-radius: 6px;
     font-size: 1rem;
     width: 220px;
+    height: 24px !important;
     outline: none;
     transition: border-color 0.3s ease;
 }

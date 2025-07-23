@@ -136,16 +136,18 @@ const Files = ({ cardName }) => {
       <div className="files-header">
         <h2>Files</h2>
         <div className="header-actions">
-          <input
-            type="text"
-            placeholder="Search here..."
-            className="search-input"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-          <button className="search-btn">
-            <i className="fas fa-search"></i> Search
-          </button>
+          <div className="search-wrapper">
+            <input
+              type="text"
+              placeholder="Search here..."
+              className="search-input"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+            <button className="search-btn">
+              <i className="fas fa-search"></i> Search
+            </button>
+          </div>
           <button className="upload-btn" onClick={() => setShowUpload(true)}>
             <i className="fas fa-upload">
               <TbCloudUpload size="1.3rem" />

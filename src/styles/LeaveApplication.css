@@ -167,6 +167,7 @@
     padding: 6px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    height: 24px !important;
 }
 
 .search-btn {
@@ -179,4 +180,15 @@
 }
 .search-btn:hover{
     background-color: #4db0d7 !important;
+}
+
+@media (max-width: 768px) {
+    .leave-header{
+        display: flex;
+        flex-direction: column;
+    }
+    .leave-actions{
+        display: flex;
+        flex-direction: column;
+    }
 }
