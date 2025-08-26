@@ -230,6 +230,7 @@
     border-radius: 6px;
     font-weight: 500;
     cursor: pointer;
+    height: 35px !important;
     transition: background-color 0.3s ease;
 }
 
