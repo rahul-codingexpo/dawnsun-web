@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.35949263.css",
+    "main.js": "/static/js/main.a49eccb0.js",
+    "static/js/453.9f7c524a.chunk.js": "/static/js/453.9f7c524a.chunk.js",
+    "static/media/dawnsun_logo.png": "/static/media/dawnsun_logo.d2893238a5631cdf14ff.png",
+    "static/media/music-icon.png": "/static/media/music-icon.666441e39d2c21b35eb2.png",
+    "static/media/viddeo_play.png": "/static/media/viddeo_play.27dc785a0812584132ad.png",
+    "static/media/word.png": "/static/media/word.a9f24f2cc2784ec4d148.png",
+    "static/media/pdf-icon.png": "/static/media/pdf-icon.487c1d2c12e49542e997.png",
+    "static/media/nothing.png": "/static/media/nothing.2e086693c50c403b215f.png",
+    "static/media/folder.png": "/static/media/folder.27b91cfb9d8c0df33fe4.png",
+    "static/media/file.svg": "/static/media/file.6e71d3ce52470dd07d920113f4b94372.svg",
+    "index.html": "/index.html",
+    "main.35949263.css.map": "/static/css/main.35949263.css.map",
+    "main.a49eccb0.js.map": "/static/js/main.a49eccb0.js.map",
+    "453.9f7c524a.chunk.js.map": "/static/js/453.9f7c524a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.35949263.css",
+    "static/js/main.a49eccb0.js"
+  ]
+}
