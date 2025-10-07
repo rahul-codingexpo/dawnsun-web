@@ -65,7 +65,7 @@
     border-collapse: collapse;
     background-color: #fff;
     border-radius: 8px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
     min-width: 1100px;

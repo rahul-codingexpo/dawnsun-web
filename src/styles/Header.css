@@ -11,10 +11,24 @@
     z-index: 90;
     background-color: var(--bg-white);
     padding: 12px 56px;
-    display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
+.global-search {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    width: 50%;
+}
+
+.global-search-input {
+    padding: 12px 12px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 100%;
+    flex: 1;
+}
+
 .notification-wrapper {
     position: relative;
     display: inline-block;
@@ -22,7 +36,7 @@
 
 .notification-top-header{
     display: flex;
-    gap: 200px;
+    justify-content: space-between;
 }
 .notification-top-header .circle-btn{
     width: 25px ;
@@ -55,6 +69,7 @@
     padding: 5px 0;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .notification-text {
@@ -88,6 +103,13 @@
 .btn-decline {
     background-color: #FFEEF3;
     color: #A90810;
+}
+.header-wrapper {
+    margin-left: 70px;
+    left: 0px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
 }
 .header-content {
     display: flex;
@@ -203,46 +225,18 @@
 }
 
 
-/* @media (max-width: 768px) {
-    .header-content {
-        justify-content: space-between;
-        
-    }
-
-    .notification-icon {
-        position: relative;
-        right: 20;
-    }
-
-    .user-profile {
-        flex-direction: row;
-        gap: 12px;
-    }
-
-    .profile-name {
-        font-size: 16px;
-    }
-
-    .profile-role {
-        font-size: 12px;
-    }
-
-    .notification-dropdown {
-        width: 90vw;
-        right: 0;
-        top: 40px;
-    }
-
-    .notification-top-header {
-        gap: 130px;
-    }
-} */
-
 @media (max-width: 768px) {
+    .header {
+        padding: 7px 10px;
+    }
+    .header-wrapper {
+        margin-left: 45px;
+            left: 10px;
+            display: flex;
+    }
     .header-content {
         justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 16px;
+        gap: 25px;
         max-width: 100%;
     }
 
@@ -252,22 +246,28 @@
 
     .user-profile {
         flex-direction: row;
-        gap: 12px;
+        gap: 15px;
     }
-
+    .global-search {
+        margin-right: 30px;
+    }
     .profile-name {
         font-size: 16px;
     }
 
     .profile-role {
-        font-size: 12px;
+        display: none;
     }
 
     .notification-dropdown {
-        width: 90vw;
-        right: 0;
+        /* width: 90vw;
         left:0px !important;
-        top: 40px;
+        top: 40px; */
+        width: 90vw;
+            left: 18px !important;
+            right: auto !important;
+            transform: translateX(-50%);
+            top: 45px;
     }
 
     .notification-top-header {

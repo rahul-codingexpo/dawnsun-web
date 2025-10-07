@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Sidebar.css";
 import logo from "../assets/dawnsun_logo.png";
 import { RiDashboardFill } from "react-icons/ri";
 import { MdFileCopy } from "react-icons/md";
+
 const Sidebar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const getActiveItemFromPath = () => {
     if (location.pathname.includes("/dashboard/files")) return "Files";
@@ -25,7 +33,8 @@ const Sidebar = () => {
 
   const [activeItem, setActiveItem] = useState(getActiveItemFromPath());
 
-  const menuItems = [
+  // Menu items for Admin
+  const adminMenuItems = [
     { name: "Dashboard", icon: <RiDashboardFill size="30" /> },
     { name: "Files", icon: <MdFileCopy size="25" /> },
     { name: "Travel Application", icon: <MdFileCopy size="25" /> },
@@ -35,6 +44,16 @@ const Sidebar = () => {
     { name: "Request Access", icon: <MdFileCopy size="25" /> },
     { name: "Logout", icon: <MdFileCopy size="25" /> },
   ];
+
+  // Menu items for normal User
+  const userMenuItems = [
+    { name: "Dashboard", icon: <RiDashboardFill size="30" /> },
+    { name: "Files", icon: <MdFileCopy size="25" /> },
+    { name: "Logout", icon: <MdFileCopy size="25" /> },
+  ];
+
+  // Pick correct menu based on role
+  const menuItems = user?.role === "Admin" ? adminMenuItems : userMenuItems;
 
   const handleMenuClick = (itemName) => {
     setActiveItem(itemName);
@@ -63,12 +82,15 @@ const Sidebar = () => {
         navigate("/dashboard/request");
         break;
       case "Logout":
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
         navigate("/");
         break;
       default:
         break;
     }
   };
+
   return (
     <>
       <button

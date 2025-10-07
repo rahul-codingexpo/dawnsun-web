@@ -1,101 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "../styles/TravelApplication.css";
-const initialData = [
-  {
-    name: "Christine Brooks",
-    email: "christinebrooks@5.com",
-    contact: "09876543212",
-    department: "Sales",
-    designation: "BD",
-    arrivalDate: "2 June, 2025",
-    departureDate: "3 June, 2025",
-    preference: "Flight",
-    status: "Decline",
-  },
-  {
-    name: "Christine Brooks",
-    email: "christinebrooks@5.com",
-    contact: "09876543212",
-    department: "IT",
-    designation: "BD",
-    arrivalDate: "4 June, 2025",
-    departureDate: "5 June, 2025",
-    preference: "Flight",
-    status: "Decline",
-  },
-  {
-    name: "Christine Brooks",
-    email: "christinebrooks@5.com",
-    contact: "09876543212",
-    department: "Sales",
-    designation: "BD",
-    arrivalDate: "6 June, 2025",
-    departureDate: "8 June, 2025",
-    preference: "Flight",
-    status: "Decline",
-  },
-  {
-    name: "Christine Brooks",
-    email: "christinebrooks@5.com",
-    contact: "09876543212",
-    department: "Sales",
-    designation: "BD",
-    arrivalDate: "20 June, 2025",
-    departureDate: "21 June, 2025",
-    preference: "Flight",
-    status: "Decline",
-  },
-  {
-    name: "Christine Brooks",
-    email: "christinebrooks@5.com",
-    contact: "09876543212",
-    department: "IT",
-    designation: "BD",
-    arrivalDate: "28 June, 2025",
-    departureDate: "29 June, 2025",
-    preference: "Flight",
-    status: "Decline",
-  },
-  {
-    name: "Christine Brooks",
-    email: "christinebrooks@5.com",
-    contact: "09876543212",
-    department: "DEVELOPMENT",
-    designation: "BD",
-    arrivalDate: "15 June, 2025",
-    departureDate: "16 June, 2025",
-    preference: "Flight",
-    status: "Decline",
-  },
-  {
-    name: "Christine Brooks",
-    email: "christinebrooks@5.com",
-    contact: "09876543212",
-    department: "IT",
-    designation: "BD",
-    arrivalDate: "18 June, 2025",
-    departureDate: "19 June, 2025",
-    preference: "Flight",
-    status: "Decline",
-  },
-  {
-    name: "Christine Brooks",
-    email: "christinebrooks@5.com",
-    contact: "09876543212",
-    department: "Sales",
-    designation: "BD",
-    arrivalDate: "4 June, 2025",
-    departureDate: "5 June, 2025",
-    preference: "Flight",
-    status: "Decline",
-  },
-];
 
 const TravelApplication = () => {
-  const [travelData, setTravelData] = useState(initialData);
+  const [travelData, setTravelData] = useState([]);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/travel");
+        const data = await res.json();
+        setTravelData(data);
+      } catch (err) {
+        console.error("Error fetching travel applications:", err);
+      }
+    };
+    fetchData();
+  }, []);
 
   const filteredData = travelData.filter((item) => {
     const values = Object.values(item).join(" ").toLowerCase();
@@ -112,12 +36,32 @@ const TravelApplication = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleStatusChange = (index, newStatus) => {
-    const updatedData = [...travelData];
-    updatedData[index].status = newStatus;
-    setTravelData(updatedData);
-    setOpenDropdownIndex(null);
+  const handleStatusChange = async (index, newStatus) => {
+    const id = travelData[index]._id;
+    try {
+      const res = await fetch(`http://localhost:5000/api/travel/${id}/status`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        const updatedData = [...travelData];
+        updatedData[index] = updated;
+        setTravelData(updatedData);
+      }
+    } catch (err) {
+      console.error("Error updating status:", err);
+    } finally {
+      setOpenDropdownIndex(null);
+    }
   };
+
+  // ✅ Pagination logic
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const visibleData = filteredData.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="travel-page">
@@ -159,23 +103,27 @@ const TravelApplication = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.slice(0, itemsPerPage).map((item, idx) => (
-              <tr key={idx}>
-                <td>{item.name}</td>
+            {visibleData.map((item, idx) => (
+              <tr key={item._id || idx}>
+                <td>{item.clientName}</td>
                 <td>
                   <span className="email-chip">{item.email}</span>
                 </td>
                 <td>{item.contact}</td>
                 <td>{item.department}</td>
                 <td>{item.designation}</td>
-                <td>{item.arrivalDate}</td>
-                <td>{item.departureDate}</td>
+                <td>
+                  {new Date(item.arrivalDate).toLocaleDateString("en-GB")}
+                </td>
+                <td>
+                  {new Date(item.departureDate).toLocaleDateString("en-GB")}
+                </td>
                 <td>{item.preference}</td>
                 <td>
                   <div className="status-dropdown-wrapper">
                     <button
                       className={`status-btn ${item.status
-                        .toLowerCase()
+                        ?.toLowerCase()
                         .replace(" ", "-")}`}
                       onClick={() =>
                         setOpenDropdownIndex(
@@ -188,11 +136,6 @@ const TravelApplication = () => {
                     {openDropdownIndex === idx && (
                       <div className="status-options">
                         <button
-                          onClick={() => handleStatusChange(idx, "Decline")}
-                        >
-                          Decline
-                        </button>
-                        <button
                           onClick={() => handleStatusChange(idx, "Approve")}
                         >
                           Approve
@@ -201,6 +144,11 @@ const TravelApplication = () => {
                           onClick={() => handleStatusChange(idx, "In Process")}
                         >
                           In Process
+                        </button>
+                        <button
+                          onClick={() => handleStatusChange(idx, "Decline")}
+                        >
+                          Decline
                         </button>
                       </div>
                     )}
@@ -223,6 +171,23 @@ const TravelApplication = () => {
           <option value="10">10</option>
         </select>
         <span>per page</span>
+        <div className="page-controls">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => p - 1)}
+          >
+            ◀ Prev
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((p) => p + 1)}
+          >
+            Next ▶
+          </button>
+        </div>
       </div>
     </div>
   );

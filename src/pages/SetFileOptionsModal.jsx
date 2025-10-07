@@ -1,92 +1,125 @@
 import React, { useState } from "react";
 import CalendarModal from "./ExpiryCalendarModal";
-import "../styles/SetFileOptionModal.css";
 import AssignMemberModal from "./AssignMemberModal";
 import RestrictConfirmationModal from "./RestrictConfirmationModal";
+import "../styles/SetFileOptionModal.css";
 
-const SetFileOptionsModal = ({ onBack, onSubmitWithOptions }) => {
+const departments = ["Sales", "HR", "Management", "Development", "All", "None"];
+
+const SetFileOptionsModal = ({
+  selectedCompany,
+  setSelectedCompany,
+  onBack,
+  onSubmitWithOptions,
+}) => {
   const [showCalendar, setShowCalendar] = useState(false);
-  const [expiryDate, setExpiryDate] = useState("");
+  const [expiryDate, setExpiryDate] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [showAssignPopup, setShowAssignPopup] = useState(false);
   const [showRestrictConfirm, setShowRestrictConfirm] = useState(false);
+  const [lifetime, setLifetime] = useState(false);
 
-  const handleSubmit = (date) => {
+  const [selectedDept, setSelectedDept] = useState("none");
+
+  const handleFinalSubmit = (date) => {
     setExpiryDate(date);
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
-      onSubmitWithOptions(date);
-    }, 4000);
+      onSubmitWithOptions(date, lifetime, selectedDept); // 🔹 pass dept to parent
+    }, 1000);
   };
 
   return (
     <div className="modal-overlay">
-      <div className="upload-modal">
+      <div className="setFile-modal">
         {!submitted ? (
           <>
-            {!showCalendar ? (
+            {!showAssignPopup && !showCalendar && !showRestrictConfirm && (
               <>
-                <button
-                  className="option-btn"
-                  onClick={() => setShowCalendar(true)}
+                {/* Department Dropdown */}
+                {/* <label className="dept-label">Select Department Access:</label> */}
+                <select
+                  className="dept-dropdown"
+                  value={selectedDept}
+                  onChange={(e) => setSelectedDept(e.target.value)}
                 >
-                  Set Expiry
-                </button>
-                <button
-                  className="option-btn"
-                  onClick={() => setShowRestrictConfirm(true)}
-                >
-                  Restrict
-                </button>
+                  <option value="none" disabled>
+                    Select Department
+                  </option>
+                  {departments.map((dept) => (
+                    <option key={dept} value={dept.toLowerCase()}>
+                      {dept}
+                    </option>
+                  ))}
+                </select>
+
                 <button
                   className="option-btn"
                   onClick={() => setShowAssignPopup(true)}
                 >
                   Assign to
                 </button>
+                {/* <button
+                  className="option-btn"
+                  onClick={() => setShowCalendar(true)}
+                >
+                  Set Expiry Date
+                </button> */}
+
+                {/* <button
+                  className="option-btn"
+                  onClick={() => {
+                    setLifetime(true);
+                    handleFinalSubmit(null);
+                  }}
+                >
+                  Set without Expiry
+                </button> */}
+
+                <button
+                  className="option-btn"
+                  onClick={() => setShowRestrictConfirm(true)}
+                >
+                  Restrict
+                </button>
                 <button className="back-red" onClick={onBack}>
                   Back
                 </button>
               </>
-            ) : (
+            )}
+
+            {showAssignPopup && (
+              <AssignMemberModal
+                onSelectMember={(companyId) => {
+                  setSelectedCompany(companyId);
+                  setShowAssignPopup(false);
+                  setShowCalendar(true); // open expiry calendar after selecting member
+                }}
+                onClose={() => setShowAssignPopup(false)}
+              />
+            )}
+
+            {showCalendar && (
               <CalendarModal
                 onBack={() => setShowCalendar(false)}
-                onDateSelect={(date) => setExpiryDate(date)}
-                onSubmit={handleSubmit}
+                onSubmit={(date) => handleFinalSubmit(date)}
               />
             )}
           </>
         ) : (
           <div className="success-popup">
             <div className="check-circle">✔</div>
-            <h3>Submit Successfully</h3>
-            <p>Your submission has been sent</p>
+            <h3>Submitted Successfully</h3>
+            <p>Your files have been uploaded</p>
           </div>
-        )}
-        {showAssignPopup && (
-          <AssignMemberModal
-            onBack={() => setShowAssignPopup(false)}
-            onSelectMember={(member) => {
-              setShowAssignPopup(member); // Save selected member
-              setShowAssignPopup(false);
-              setShowCalendar(true);
-            }}
-            onClose={() => setShowAssignPopup(false)}
-          />
         )}
 
         {showRestrictConfirm && (
           <RestrictConfirmationModal
-            // onSubmit={{ handleSubmit }}
             onSubmit={() => {
               setShowRestrictConfirm(false);
-              setSubmitted(true);
-              handleSubmit();
-              setTimeout(() => {
-                setSubmitted(false);
-                onBack();
-              }, 4000);
+              handleFinalSubmit(expiryDate);
             }}
             onIgnore={() => setShowRestrictConfirm(false)}
           />

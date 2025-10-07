@@ -1,9 +1,20 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../styles/CreateFolderModal.css";
 
-const CreateFolderModal = ({ onClose, onCreate }) => {
+const CreateFolderModal = ({
+  onClose,
+  parentId = null,
+  companies,
+  addCompany,
+}) => {
   const modalRef = useRef();
+  const [folderName, setFolderName] = useState("");
+  const [department, setDepartment] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [assignedTo, setAssignedTo] = useState("");
+  const [newCompany, setNewCompany] = useState("");
 
+  // Close modal when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -14,11 +25,55 @@ const CreateFolderModal = ({ onClose, onCreate }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    onCreate();
-    onClose();
+    let companyIdToAssign = assignedTo;
+
+    // If creating new company
+    if (assignedTo === "new" && newCompany.trim()) {
+      const createdCompany = await addCompany(newCompany);
+      // ✅ ensure addCompany returns { _id, name }
+      companyIdToAssign = createdCompany._id;
+    }
+
+    if (!companyIdToAssign) {
+      alert("Please select or create a company");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch("http://localhost:5000/api/items/folder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name: folderName,
+          companyId: companyIdToAssign, // send ObjectId
+          department: department.toLowerCase(),
+          expiryDate: expiryDate || null,
+          parentId: parentId || null,
+        }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.message || "Failed to create folder");
+      }
+
+      const data = await response.json();
+      console.log("✅ Folder created:", data);
+
+      window.location.reload();
+      onClose();
+    } catch (error) {
+      console.error("❌ Error creating folder:", error);
+      alert("Error creating folder: " + error.message);
+    }
   };
 
   return (
@@ -31,12 +86,18 @@ const CreateFolderModal = ({ onClose, onCreate }) => {
           </button>
         </div>
         <hr className="modal-divider" />
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>
               Folder Name <span>*</span>
             </label>
-            <input type="text" placeholder="Enter Folder Name" required />
+            <input
+              type="text"
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+              required
+            />
           </div>
 
           <div className="form-row">
@@ -44,35 +105,65 @@ const CreateFolderModal = ({ onClose, onCreate }) => {
               <label>
                 Department <span>*</span>
               </label>
-              <select required>
+              <select
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+                required
+              >
                 <option value="">Select Department</option>
-                <option value="HR">Sales</option>
-                <option value="IT">HR</option>
-                <option value="IT">Management</option>
-                <option value="IT">Development</option>
+                <option value="All">All</option>
+                <option value="Sales">Sales</option>
+                <option value="HR">HR</option>
+                <option value="Management">Management</option>
+                <option value="Development">Development</option>
+                <option value="None">None</option>
               </select>
             </div>
 
             <div className="form-group" style={{ flex: 1 }}>
-              <label>
-                Expiry Date <span>*</span>
-              </label>
-              <input type="date" required />
+              <label>Expiry Date</label>
+              <input
+                type="date"
+                value={expiryDate}
+                onChange={(e) => setExpiryDate(e.target.value)}
+              />
             </div>
           </div>
-
           <div className="form-group">
             <label>Assign To</label>
-            <select>
-              <option value="">Select Name</option>
-              <option value="John">Downsun Exib</option>
-              <option value="Sara">DKAEPL</option>
-              <option value="Sara">DMPL</option>
-              <option value="Sara">WR</option>
-              <option value="Sara">Fisher Tirech</option>
-              <option value="Sara">Dawnsun Tirech</option>
+            <select
+              value={assignedTo}
+              onChange={(e) => setAssignedTo(e.target.value)}
+            >
+              <option key="default" value="">
+                Select Company
+              </option>
+              {companies.map((c, idx) => {
+                const companyId = c._id || c; // fallback if it's just a string
+                const companyName = c.name || c; // fallback if it's just a string
+                return (
+                  <option key={companyId || `company-${idx}`} value={companyId}>
+                    {companyName}
+                  </option>
+                );
+              })}
+              <option key="new" value="new">
+                + Create New Company
+              </option>
             </select>
           </div>
+
+          {assignedTo === "new" && (
+            <div className="form-group">
+              <label>New Company Name</label>
+              <input
+                type="text"
+                value={newCompany}
+                onChange={(e) => setNewCompany(e.target.value)}
+                required
+              />
+            </div>
+          )}
 
           <div className="modal-footer">
             <button type="button" className="cancel-btn" onClick={onClose}>

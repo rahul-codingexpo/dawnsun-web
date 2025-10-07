@@ -1,5 +1,4 @@
 .request-access-page {
-    padding: 20px;
     background-color: #F3F4F8;
     min-height: 100vh;
 }
@@ -24,7 +23,6 @@
     background: white;
     border-radius: 12px;
     overflow-x: auto;
-    padding: 12px;
 }
 
 .access-table {
@@ -46,22 +44,46 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    font-weight: 600;
     font-size: 13px;
 }
-
-.status-btn.approve {
-    background-color: #e0f7e9;
-    color: #219653;
+.status-options button:hover {
+    background-color: #f0f0f0;
+}
+.page-controls button{
+    border:#ddd 2px solid;
+    border-radius: 5px;
+}
+.page-controls button:hover {
+    background-color: #009fe3;
+    color: #fff;
+}
+.page-controls button:disabled:hover {
+    background-color: #fafafa;
+    color: #b4b4b4;
+    cursor: not-allowed;
+}
+.page-controls span{
+padding: 5px;
+}
+.status-btn.approved {
+    color: #28a745;
+    background-color: #d1f2e9;
+    /* green */
 }
 
-.status-btn.decline {
-    background-color: #fdecea;
-    color: #d32f2f;
+/* Pending → Yellow */
+.status-btn.pending {
+    color: #ffaa00;
+    background-color: #fff5d4;
+    /* better contrast */
 }
 
-.status-btn.in-process {
-    background-color: #fff3cd;
-    color: #f0ad4e;
+/* Denied → Red */
+.status-btn.denied {
+    color: #dc3545;
+    background-color: #fce2e2;
+    /* red */
 }
 
 .edit-btn {
@@ -123,9 +145,6 @@
     cursor: pointer;
 }
 
-.status-options button:hover {
-    background-color: #f0f0f0;
-}
 
 .pagination {
     margin-top: 20px;
@@ -142,7 +161,6 @@
 
 @media (max-width: 768px) {
     .request-header{
-        /* gap:30px; */
         display: flex;
         flex-direction: column;
     }

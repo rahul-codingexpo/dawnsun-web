@@ -1,5 +1,5 @@
 .leave-page {
-    padding: 1rem;
+    
     background: #F3F4F8;
     border-radius: 8px;
 }
@@ -45,7 +45,7 @@
     text-align: left;
     white-space: nowrap;
     font-weight: 400;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .leave-table th {
@@ -81,6 +81,10 @@
     font-weight: 600;
     cursor: pointer;
 }
+.approve-btn:hover{
+    background-color: #27ae60;
+    color: #fff;
+}
 
 .decline-btn {
     background-color: #fce2e2;
@@ -91,7 +95,10 @@
     font-weight: 600;
     cursor: pointer;
 }
-
+.decline-btn:hover{
+    background-color: #e74c3c;
+    color: #fff;
+}
 .pagination {
     display: flex;
     align-items: center;
@@ -186,6 +193,9 @@
     .leave-header{
         display: flex;
         flex-direction: column;
+    }
+    .leave-header h2{
+        margin-bottom: 10px;
     }
     .leave-actions{
         display: flex;

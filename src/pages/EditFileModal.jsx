@@ -2,42 +2,75 @@ import React, { useState, useEffect, useRef } from "react";
 import "../styles/EditFileModal.css";
 
 const EditFileModal = ({ file, onClose, onSave }) => {
-  const [formData, setFormData] = useState({ ...file });
-
   const modalRef = useRef(null);
 
+  // Helper to format ISO date to YYYY-MM-DD for <input type="date">
+  const formatForInput = (dateStr) => {
+    if (!dateStr) return "";
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  // Initialize form state safely
+  const [formData, setFormData] = useState({
+    name: file.name || "",
+    uploadedDate: formatForInput(file.uploadedDate),
+    expiryDate: formatForInput(file.expiryDate),
+  });
+
+  // Close modal on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         onClose();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  });
+  }, [onClose]);
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle save
+  // const handleSubmit = () => {
+  //   const updatedData = {
+  //     _id: file._id, // keep original ID
+  //     name: formData.name,
+  //     uploadedDate: formData.uploadedDate
+  //       ? new Date(formData.uploadedDate).toISOString()
+  //       : null,
+  //     expiryDate: formData.expiryDate
+  //       ? new Date(formData.expiryDate).toISOString()
+  //       : null,
+  //     isFolder: file.isFolder,
+  //   };
+
+  //   onSave(updatedData);
+  //   onClose();
+  // };
   const handleSubmit = () => {
-    const formatDate = (dateStr) => {
-      return new Date(dateStr).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
+    const updatedData = {
+      _id: file._id, // keep original ID
+      name: formData.name,
+      uploadedDate: formData.uploadedDate
+        ? new Date(formData.uploadedDate).toISOString()
+        : null,
+      expiryDate: formData.expiryDate
+        ? new Date(formData.expiryDate).toISOString()
+        : null,
+      isFolder: file.isFolder,
+      url: file.url, // ✅ send the current URL to backend
     };
 
-    const updatedData = {
-      ...formData,
-      uploadedDate: formatDate(formData.uploadedDate),
-      expiryDate: formatDate(formData.expiryDate),
-    };
     onSave(updatedData);
     onClose();
   };
@@ -66,16 +99,6 @@ const EditFileModal = ({ file, onClose, onSave }) => {
 
         <div className="form-row">
           <div className="form-group">
-            <label>Type *</label>
-            <input
-              type="text"
-              name="type"
-              value={formData.type}
-              onChange={handleChange}
-              placeholder="Type"
-            />
-          </div>
-          <div className="form-group">
             <label>Uploaded Date *</label>
             <input
               type="date"
@@ -101,7 +124,7 @@ const EditFileModal = ({ file, onClose, onSave }) => {
             Cancel
           </button>
           <button className="save-btn" onClick={handleSubmit}>
-            Edit
+            Save
           </button>
         </div>
       </div>

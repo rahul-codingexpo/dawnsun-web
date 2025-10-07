@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.css";
 import loginImage from "../assets/dawnsun_logo.png";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/dashboard");
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", res.data.token); // store token
+      localStorage.setItem("user", JSON.stringify(res.data.user)); //user info
+      navigate("/dashboard");
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    }
   };
 
   return (
@@ -20,7 +36,8 @@ const Login = () => {
           <p>
             <i>
               Welcome.
-              <br /> Start your journey now with our management system!
+              <br />
+              Start your journey now with our management system!
             </i>
           </p>
         </div>
@@ -32,12 +49,26 @@ const Login = () => {
           </div>
           <h2>Login</h2>
           <p>Enter your email address and password to log in.</p>
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <form onSubmit={handleSubmit}>
             <label>Email</label>
-            <input type="email" placeholder="Enter your email" required />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
 
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+
             <div className="login-extra">
               <Link to="/forgot-password">Forgot Password?</Link>
             </div>
