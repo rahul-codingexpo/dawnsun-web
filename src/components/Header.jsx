@@ -1,5 +1,3 @@
-/*updated code*/
-
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/Header.css";
 import Avtar from "../assets/avtar.png";
@@ -21,7 +19,7 @@ const Header = ({ onSearch, searchTerm }) => {
     }
   }, []);
 
-  // ✅ Fetch access requests (only for Admins)
+  // Fetch access requests (only for Admins)
   useEffect(() => {
     const fetchRequests = async () => {
       if (!user || user.role !== "Admin") return; // only Admin sees requests
@@ -54,7 +52,7 @@ const Header = ({ onSearch, searchTerm }) => {
     fetchRequests();
   }, [user, token]);
 
-  // ✅ Handle Approve/Deny from dropdown
+  // Handle Approve/Deny from dropdown
   const handleUpdateStatus = async (id, status) => {
     try {
       const res = await fetch(
@@ -126,7 +124,7 @@ const Header = ({ onSearch, searchTerm }) => {
         </div>
 
         <div className="header-content">
-          {/* 🔔 Notification */}
+          {/* Notification */}
           {user?.role === "Admin" && (
             <div className="notification-wrapper">
               <div
@@ -185,7 +183,7 @@ const Header = ({ onSearch, searchTerm }) => {
               )}
             </div>
           )}
-          {/* 👤 User Profile */}
+          {/* User Profile */}
           <div className="user-profile">
             <img src={Avtar} alt="Profile" className="profile-img" />
             <div className="profile-info">
