@@ -28,9 +28,13 @@ const Dashboard = () => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("http://localhost:5000/api/auth/me", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      // "http://localhost:5000/api/auth/me",
+      "http://139.59.68.77:5000/api/auth/me",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setUserRole(data.role);
@@ -40,7 +44,8 @@ const Dashboard = () => {
 
   // ✅ Fetch companies
   useEffect(() => {
-    fetch("http://localhost:5000/api/companies")
+    // fetch("http://localhost:5000/api/companies")
+    fetch("http://139.59.68.77:5000/api/companies")
       .then((res) => res.json())
       .then((data) => setCompanies(data))
       .catch((err) => console.error(err));

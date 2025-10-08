@@ -182,9 +182,13 @@ export default function LeaveApplications() {
 
   const fetchLeaves = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/leaves", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
+      const res = await axios.get(
+        // "http://localhost:5000/api/leaves",
+        "http://139.59.68.77:5000/api/leaves",
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       setLeaves(res.data);
     } catch (err) {
       console.error(err);
@@ -194,7 +198,8 @@ export default function LeaveApplications() {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/leaves/${id}`,
+        // `http://localhost:5000/api/leaves/${id}`,
+        `http://139.59.68.77:5000/api/leaves/${id}`,
         { status },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

@@ -146,11 +146,15 @@ const UploadModal = ({ onClose, onAddFile, parentId = null }) => {
     );
 
     try {
-      const res = await fetch("http://localhost:5000/api/items/upload", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      });
+      const res = await fetch(
+        // "http://localhost:5000/api/items/upload",
+        "http://139.59.68.77:5000/api/items/upload",
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Upload failed");

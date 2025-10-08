@@ -42,7 +42,8 @@ const Files = ({ searchTerm, setSearchTerm }) => {
 
   const fetchItems = async (parentId = null) => {
     try {
-      const url = new URL("http://localhost:5000/api/items");
+      // const url = new URL("http://localhost:5000/api/items");
+      const url = new URL("http://139.59.68.77:5000/api/items");
 
       // If companyId exists, fetch company-specific files
       if (companyId) url.searchParams.set("companyId", companyId);
@@ -79,9 +80,13 @@ const Files = ({ searchTerm, setSearchTerm }) => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("http://localhost:5000/api/auth/me", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      // "http://localhost:5000/api/auth/me",
+      "http://139.59.68.77:5000/api/auth/me",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setUserRole(data.role);
@@ -92,7 +97,8 @@ const Files = ({ searchTerm, setSearchTerm }) => {
   const checkUserAccess = async (itemId) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/access-request/check/${itemId}`,
+        // `http://localhost:5000/api/access-request/check/${itemId}`,
+        `http://139.59.68.77:5000/api/access-request/check/${itemId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -108,17 +114,21 @@ const Files = ({ searchTerm, setSearchTerm }) => {
   // Send access request
   const requestAccess = async (itemId, itemType) => {
     try {
-      const res = await fetch("http://localhost:5000/api/access-request", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          itemId,
-          itemType, // "file" or "folder"
-        }),
-      });
+      const res = await fetch(
+        // "http://localhost:5000/api/access-request",
+        "http://139.59.68.77:5000/api/access-request",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            itemId,
+            itemType, // "file" or "folder"
+          }),
+        }
+      );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to send request");
       return true;
@@ -149,7 +159,8 @@ const Files = ({ searchTerm, setSearchTerm }) => {
 
       // ✅ Ask backend if user can open
       const res = await fetch(
-        `http://localhost:5000/api/items/${item._id}/open`,
+        // `http://localhost:5000/api/items/${item._id}/open`,
+        `http://139.59.68.77:5000/api/items/${item._id}/open`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -196,7 +207,8 @@ const Files = ({ searchTerm, setSearchTerm }) => {
     }
   };
   useEffect(() => {
-    fetch("http://localhost:5000/api/companies")
+    // fetch("http://localhost:5000/api/companies")
+    fetch("http://139.59.68.77:5000/api/companies")
       .then((res) => res.json())
       .then((data) => {
         setCompanies(data);
@@ -212,11 +224,15 @@ const Files = ({ searchTerm, setSearchTerm }) => {
 
   const addCompany = async (newCompany) => {
     try {
-      const res = await fetch("http://localhost:5000/api/companies", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: newCompany }),
-      });
+      const res = await fetch(
+        // "http://localhost:5000/api/companies",
+        "http://139.59.68.77:5000/api/companies",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: newCompany }),
+        }
+      );
       const data = await res.json();
       if (res.ok) {
         setCompanies((prev) => [...prev, data]);
@@ -236,7 +252,8 @@ const Files = ({ searchTerm, setSearchTerm }) => {
       }
 
       const res = await fetch(
-        `http://localhost:5000/api/items/${updatedFile._id}`,
+        // `http://localhost:5000/api/items/${updatedFile._id}`,
+        `http://139.59.68.77:5000/api/items/${updatedFile._id}`,
         {
           method: "PUT",
           headers: {
@@ -266,7 +283,8 @@ const Files = ({ searchTerm, setSearchTerm }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/items/${deleteFile._id}`,
+        // `http://localhost:5000/api/items/${deleteFile._id}`,
+        `http://139.59.68.77:5000/api/items/${deleteFile._id}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
@@ -289,18 +307,22 @@ const Files = ({ searchTerm, setSearchTerm }) => {
 
   const createFolder = async (folderData) => {
     try {
-      const res = await fetch("http://localhost:5000/api/items/folders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: folderData.name,
-          companyId: companyId,
-          parentId: currentFolder,
-        }),
-      });
+      const res = await fetch(
+        // "http://localhost:5000/api/items/folders",
+        "http://139.59.68.77:5000/api/items/folders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: folderData.name,
+            companyId: companyId,
+            parentId: currentFolder,
+          }),
+        }
+      );
 
       const data = await res.json();
       if (res.ok) {
@@ -318,7 +340,8 @@ const Files = ({ searchTerm, setSearchTerm }) => {
     if (!assignFile) return;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/items/${assignFile._id}/assign`,
+        // `http://localhost:5000/api/items/${assignFile._id}/assign`,
+        `http://139.59.68.77:5000/api/items/${assignFile._id}/assign`,
         {
           method: "PUT",
           headers: {

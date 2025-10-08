@@ -18,11 +18,15 @@ const RequestAccessPage = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/access-request", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          // "http://localhost:5000/api/access-request",
+          "http://139.59.68.77:5000/api/access-request",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         const result = await res.json();
         const sorted = result.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -38,7 +42,8 @@ const RequestAccessPage = () => {
   const updateStatus = async (id, status, index) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/access-request/${id}`,
+        // `http://localhost:5000/api/access-request/${id}`,
+        `http://139.59.68.77:5000/api/access-request/${id}`,
         {
           method: "PATCH",
           headers: {

@@ -45,20 +45,24 @@ const CreateFolderModal = ({
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:5000/api/items/folder", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: folderName,
-          companyId: companyIdToAssign, // send ObjectId
-          department: department.toLowerCase(),
-          expiryDate: expiryDate || null,
-          parentId: parentId || null,
-        }),
-      });
+      const response = await fetch(
+        // "http://localhost:5000/api/items/folder",
+        "http://139.59.68.77:5000/api/items/folder",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: folderName,
+            companyId: companyIdToAssign, // send ObjectId
+            department: department.toLowerCase(),
+            expiryDate: expiryDate || null,
+            parentId: parentId || null,
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errData = await response.json();

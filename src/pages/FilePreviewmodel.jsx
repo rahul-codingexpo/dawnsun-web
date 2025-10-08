@@ -26,7 +26,8 @@ const FilePreviewModal = ({ file, onClose }) => {
     if (file.url.startsWith("http")) return file.url;
     let normalized = file.url.replace(/^\/?uploads[\\/]/, "");
     normalized = normalized.replace(/\\/g, "/");
-    return `http://localhost:5000/uploads/${normalized}`;
+    // return `http://localhost:5000/uploads/${normalized}`;
+    return `http://139.59.68.77:5000/uploads/${normalized}`;
   };
 
   useEffect(() => {

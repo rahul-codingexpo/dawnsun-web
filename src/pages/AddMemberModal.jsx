@@ -179,7 +179,8 @@ const AddMemberModal = ({ onClose, onMemberAdded }) => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:5000/api/auth/add-member",
+        // "http://localhost:5000/api/auth/add-member",
+        "http://139.59.68.77:5000/api/auth/add-member",
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

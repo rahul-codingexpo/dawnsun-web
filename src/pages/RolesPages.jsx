@@ -20,9 +20,13 @@ const RolesPage = () => {
     const fetchMembers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/auth/members", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          // "http://localhost:5000/api/auth/members",
+          "http://139.59.68.77:5000/api/auth/members",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setData(res.data);
       } catch (err) {
         console.error("Error fetching members:", err);
@@ -37,7 +41,8 @@ const RolesPage = () => {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:5000/api/auth/members/${member._id}/status`,
+        // `http://localhost:5000/api/auth/members/${member._id}/status`,
+        `http://139.59.68.77:5000/api/auth/members/${member._id}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -54,7 +59,8 @@ const RolesPage = () => {
   const deleteMember = async (id, idx) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/auth/members/${id}`, {
+      // await axios.delete(`http://localhost:5000/api/auth/members/${id}`,
+      await axios.delete(`http://139.59.68.77:5000/api/auth/members/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const updated = [...data];

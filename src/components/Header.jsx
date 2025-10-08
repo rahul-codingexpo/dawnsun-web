@@ -24,7 +24,12 @@ const Header = ({ onSearch, searchTerm }) => {
     const fetchRequests = async () => {
       if (!user || user.role !== "Admin") return; // only Admin sees requests
       try {
-        const res = await fetch("http://localhost:5000/api/access-request", {
+        // const res = await fetch("http://localhost:5000/api/access-request", {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // });
+        const res = await fetch("http://139.59.68.77:5000/api/access-request", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -56,7 +61,8 @@ const Header = ({ onSearch, searchTerm }) => {
   const handleUpdateStatus = async (id, status) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/access-request/${id}`,
+        // `http://localhost:5000/api/access-request/${id}`,
+        `http://139.59.68.77:5000/api/access-request/${id}`,
         {
           method: "PATCH",
           headers: {

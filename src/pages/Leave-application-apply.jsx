@@ -27,7 +27,11 @@ export default function LeaveApplicationApply() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/leaves", formData);
+      await axios.post(
+        // "http://localhost:5000/api/leaves",
+        "http://139.59.68.77:5000/api/leaves",
+        formData
+      );
       alert("Leave application submitted successfully!");
       setFormData({
         name: "",

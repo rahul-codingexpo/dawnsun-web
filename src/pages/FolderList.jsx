@@ -46,7 +46,8 @@ const FolderList = () => {
         if (!token) return;
 
         const res = await fetch(
-          `http://localhost:5000/api/items?parentId=${folderId || "null"}`,
+          // `http://localhost:5000/api/items?parentId=${folderId || "null"}`,
+          `http://139.59.68.77:5000/api/items?parentId=${folderId || "null"}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

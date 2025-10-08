@@ -23,9 +23,15 @@ const LogsPage = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/logs", {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        });
+        const res = await fetch(
+          // "http://localhost:5000/api/auth/logs",
+          "http://139.59.68.77:5000/api/auth/logs",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         const data = await res.json();
         setLogsData(data);
       } catch (err) {

@@ -15,7 +15,10 @@ const AssignMemberModal = ({ onSelectMember, onClose }) => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/companies", {
+        // const res = await axios.get("http://localhost:5000/api/companies", {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
+        const res = await axios.get("http://139.59.68.77:5000/api/companies", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCompanies(res.data);

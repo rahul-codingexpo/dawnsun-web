@@ -38,11 +38,15 @@ export default function TravelApplicationForm() {
 
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/travel", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        // "http://localhost:5000/api/travel",
+        "http://139.59.68.77:5000/api/travel",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (res.ok) {
         alert("Form submitted successfully!");

@@ -11,7 +11,10 @@ const TravelApplication = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/travel");
+        const res = await fetch(
+          // "http://localhost:5000/api/travel"
+          "http://139.59.68.77:5000/api/travel"
+        );
         const data = await res.json();
         setTravelData(data);
       } catch (err) {

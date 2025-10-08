@@ -35,7 +35,8 @@ const ShareWithDepartmentModal = ({
       }
 
       const res = await axios.get(
-        `http://localhost:5000/api/items/departments?companyId=${companyId}`
+        // `http://localhost:5000/api/items/departments?companyId=${companyId}`
+        `http://139.59.68.77:5000/api/items/departments?companyId=${companyId}`
       );
       setDepartments(res.data);
     } catch (error) {
